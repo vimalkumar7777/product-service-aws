@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 843036589612.dkr.ecr.ap-south-1.amazonaws.com
+
+  build:
+    commands:
+      - mvn clean package
+      - docker build -t product-service-aws .
+      - docker tag product-service-aws:latest 843036589612.dkr.ecr.ap-south-1.amazonaws.com/product-service-aws:latest
+
+  post_build:
+    commands:
+      - docker push 843036589612.dkr.ecr.ap-south-1.amazonaws.com/product-service-aws:latest
