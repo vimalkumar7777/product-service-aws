@@ -27,4 +27,5 @@ public class ProductRequest {
     @Min(value = 0, message = "Stock cannot be negative")
     private int stock;
 	
+	
 }
